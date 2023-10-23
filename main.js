@@ -17,7 +17,14 @@ rowElements.forEach(rowElement => {
         const button = {
             id : buttonElement.id,
             isActive : false,
+            audio : new Audio();
         }
+
+        buttonElement.addEventListener('click', () => {
+            // Toggle the isActive property when the button is clicked
+            button.isActive = !button.isActive;
+            // You can add further logic here to visually update the button's appearance
+        });
 
         row.buttons.push(button);
     });
