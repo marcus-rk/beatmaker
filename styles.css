@@ -33,34 +33,46 @@ main {
 }
 
 .row {
-    background-color: darksalmon;
-
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.row span {
-    background-color: cadetblue;
-
+.row span,
+.row button {
+    width: 10%;
+    aspect-ratio: 1/1;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 10%;
     font-weight: bold;
 }
 
 .row button {
     background-color: #495057;
-
     cursor: pointer;
-    width: 10%;
-    aspect-ratio: 1/1;
-    border: 4px solid #212529;
-    border-radius: 0;
-
-    transition-duration: 0.15s;
+    border: 6px solid #212529;
+    transition: background-color 0.15s, border 0.15s;
 } .row button:hover {
       background-color: #6c757d;
+  }
+
+.kick,
+.row button.kick {
+    background-color: red;
+    border: 6px solid darkred;
+} .row button.kick:hover {
+      background-color: darkred;
+      border: 6px solid red;
+  }
+
+.snare,
+.row button.snare{
+    background-color: yellow;
+    border: 6px solid gold;
+} .row button.snare:hover {
+      background-color: gold;
+      border: 6px solid yellow;
   }
