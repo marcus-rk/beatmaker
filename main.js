@@ -51,3 +51,28 @@ rowElements.forEach(rowElement => {
 
     sequencer.push(rowObject);
 });
+
+const playButton = document.querySelector('header button');
+
+playButton.addEventListener('click', play);
+
+let beatIndex = 0;
+
+// TODO: Make sure that play can not be played mulitple times
+function play() {
+    const numberOfRows = sequencer.length;
+    const beatsPerRow = 8; // Fixed number of 8 buttons in each row
+
+    for (let j = 0; j < numberOfRows; j++) {
+        const currentRow = sequencer[j];
+        const currentButton = currentRow.buttons[beatIndex];
+
+        if (currentButton.isActive) {
+            currentButton.audio.play();
+        }
+    }
+
+    beatIndex = (beatIndex + 1) % beatsPerRow;
+
+    setTimeout(play, (60000 / 160)); // TODO: make bpm work
+}
