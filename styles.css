@@ -6,6 +6,14 @@
     padding: 0;
     font-family: Arial, sans-serif;
     color: black;
+    font-size: 1.15rem;
+}
+
+
+body,
+main,
+header {
+    background-color: #021C26;
 }
 
 header {
@@ -14,7 +22,12 @@ header {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    background-color: #6c757d;
+    border-bottom: 4px solid #0BBF38;
+}
+
+h1 {
+    font-size: 2.3rem;
+    color: #0BBF38;
 }
 
 main {
@@ -24,8 +37,12 @@ main {
 }
 
 .sequencer {
-    width: 80%;
-    padding: 10px 0 10px 0;
+    background-color: gray;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
+    width: 95%;
+    padding-top: 2%;
+    margin: 5% 0;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,7 +53,29 @@ main {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
+}
+
+.beat-counter {
+    background-color: #2e659b;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+    margin-top: 12px;
+    border-radius: 0 0 12px 12px;
+    border-top: 4px solid #0BBF38;
+}
+
+.beat-counter span {
+    width: 10%;
+    padding: 12px 0;
+    margin-right: 0.85%;
+    text-align: center;
+}
+
+.first-beat {
+    font-weight: bold;
 }
 
 .row span,
@@ -52,6 +91,7 @@ main {
 
 .row button {
     background-color: #495057;
+    color: black; /* TODO: TEMP */
     cursor: pointer;
     border: 6px solid #212529;
     transition: background-color 0.15s, border 0.15s;
@@ -70,9 +110,18 @@ main {
 
 .snare,
 .row button.snare{
+    background-color: orange;
+    border: 6px solid darkorange;
+} .row button.snare:hover {
+      background-color: darkorange;
+      border: 6px solid orange;
+  }
+
+.high-hat,
+.row button.high-hat{
     background-color: yellow;
     border: 6px solid gold;
-} .row button.snare:hover {
+} .row button.high-hat:hover {
       background-color: gold;
       border: 6px solid yellow;
   }

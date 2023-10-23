@@ -24,6 +24,10 @@ rowElements.forEach(rowElement => {
             rowObject.audioType = 'snare/snare_1.wav';
             rowObject.colorPalette = 'snare';
             break;
+        case 'High-hat':
+            rowObject.audioType = 'high-hat/high-hat_1.wav';
+            rowObject.colorPalette = 'high-hat';
+            break;
     }
 
     spanElement.classList.add(rowObject.colorPalette);
@@ -54,25 +58,47 @@ rowElements.forEach(rowElement => {
 
 const playButton = document.querySelector('header button');
 
-playButton.addEventListener('click', play);
+playButton.addEventListener('click', togglePlay);
+document.addEventListener('keydown', (event) => {
+    if (event.key === ' ' || event.key === 'Spacebar') {
+        togglePlay();
+        event.preventDefault(); // Prevent scrolling behavior in some browsers
+    }
+});
+
+let isPlaying = false;
+
+function togglePlay() {
+    isPlaying = !isPlaying;
+
+    if (isPlaying) {
+        playButton.textText = 'Stop';
+        playLoop();
+    } else {
+        playButton.textText = 'Play';
+        beatIndex = 0;
+    }
+}
 
 let beatIndex = 0;
+const BPM = 120; // TODO: dynamic in future
 
-// TODO: Make sure that play can not be played mulitple times
-function play() {
-    const numberOfRows = sequencer.length;
-    const beatsPerRow = 8; // Fixed number of 8 buttons in each row
+function playLoop() {
+    if (isPlaying) {
+        const numberOfRows = sequencer.length;
+        const beatsPerRow = 8; // Fixed number of 8 buttons in each row
 
-    for (let j = 0; j < numberOfRows; j++) {
-        const currentRow = sequencer[j];
-        const currentButton = currentRow.buttons[beatIndex];
+        for (let i = 0; i < numberOfRows; i++) {
+            const currentRow = sequencer[i];
+            const currentButton = currentRow.buttons[beatIndex];
 
-        if (currentButton.isActive) {
-            currentButton.audio.play();
+            if (currentButton.isActive) {
+                currentButton.audio.play();
+            }
         }
+
+        beatIndex = (beatIndex + 1) % beatsPerRow;
+
+        setTimeout(playLoop, (30000 / BPM)); // Adjust the timing as needed
     }
-
-    beatIndex = (beatIndex + 1) % beatsPerRow;
-
-    setTimeout(play, (60000 / 160)); // TODO: make bpm work
 }
