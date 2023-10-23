@@ -12,10 +12,38 @@
 </head>
 <body>
 <header>
-
+  <button>PLAY</button> <!-- TODO: should be an icon in future -->
+  <h1>BEATMAKER</h1>
+  <div class="bpm-control">
+    <label for="bpm">BPM:</label>
+    <input type="number" id="bpm" value="120" min="40" max="240"> <!-- TODO: Metronome functinoality should be done -->
+  </div>
 </header>
 <main>
-
+  <section class="sequencer">
+    <div class="row">
+      <span>Kick</span>
+      <button id="kick-beat-1"></button>
+      <button id="kick-beat-2"></button>
+      <button id="kick-beat-3"></button>
+      <button id="kick-beat-4"></button>
+      <button id="kick-beat-5"></button>
+      <button id="kick-beat-6"></button>
+      <button id="kick-beat-7"></button>
+      <button id="kick-beat-8"></button>
+    </div>
+    <div class="row">
+      <span>Snare</span>
+      <button id="snare-beat-1"></button>
+      <button id="snare-beat-2"></button>
+      <button id="snare-beat-3"></button>
+      <button id="snare-beat-4"></button>
+      <button id="snare-beat-5"></button>
+      <button id="snare-beat-6"></button>
+      <button id="snare-beat-7"></button>
+      <button id="snare-beat-8"></button>
+    </div>
+  </section>
 </main>
 <!-- link javascript -->
 <script src="main.js"></script>
