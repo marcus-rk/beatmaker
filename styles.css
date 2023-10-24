@@ -141,11 +141,11 @@ button {
 
 .kick,
 button.kick {
-    background-color: #FF2C21;
-    border: 6px solid #FF6961;
+    background-color: #DF2E38;
+    border: 6px solid #850000;
 } button.kick:hover, .kick:hover {
-      background-color: #FF6961;
-      border: 6px solid #FF2C21;
+      background-color: #850000;
+      border: 6px solid #DF2E38;
 
   }
 
@@ -169,8 +169,8 @@ button.high-hat{
   }
 
 .playing {
-    background-color: white;
-    border: 6px solid darkgray;
+    background-color: #FDFAF6;
+    border: 6px solid #EFF8FF;
 }
 
 /************************************/
