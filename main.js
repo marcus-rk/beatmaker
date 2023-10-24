@@ -1,16 +1,24 @@
-// makj0005
+// Makj0005
 
-let isPlaying = false; // default false
-let beatIndex = 0; // default 0
-let BPM = 120; // default 120
-let isMobile = window.innerWidth <= 768; // same as in CSS
+// Create an AudioContext
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
+// Define global constants and variables
+const sequencer = [];
+let isPlaying = false;
+let beatIndex = 0;
+let BPM = 120;
+let isMobile = window.innerWidth <= 768;
+
+// Select DOM elements
 const bpmInputElement = document.getElementById('bpm');
+const playButton = document.querySelector('header button');
+const sequencerElement = document.querySelector('.sequencer');
+const rowElements = sequencerElement.querySelectorAll('.row');
 
 bpmInputElement.addEventListener('change', () => {
     let newBPM = bpmInputElement.value;
 
-    // Ensure the newBPM value is within the valid range
     if (newBPM < 40) {
         newBPM = 40;
     } else if (newBPM > 240) {
@@ -25,76 +33,70 @@ window.addEventListener('resize', () => {
     isMobile = window.innerWidth <= 768;
 });
 
-const sequencerElement = document.querySelector('.sequencer');
-const rowElements = sequencerElement.querySelectorAll('.row')
-
-const sequencer = [];
 rowElements.forEach(rowElement => {
     const spanElement = rowElement.querySelector('span');
     const rowObject = {
         name: spanElement.innerText,
         buttons: [],
-        audioName: '',
+        audioBuffer: null,
         colorPalette: '',
     };
 
-    // get audio type from row span name etc. kick, snare, HH etc.
     switch (rowObject.name) {
         case 'Kick':
-            rowObject.audioName = 'kick/kick_1.aac';
+            rowObject.audioType = 'kick/kick_1.wav';
             rowObject.colorPalette = 'kick';
             break;
         case 'Snare':
-            rowObject.audioName = 'snare/snare_1.aac';
+            rowObject.audioType = 'snare/snare_1.wav';
             rowObject.colorPalette = 'snare';
             break;
         case 'High-hat':
-            rowObject.audioName = 'high-hat/high-hat_1.aac';
+            rowObject.audioType = 'high-hat/high-hat_1.wav';
             rowObject.colorPalette = 'high-hat';
             break;
     }
 
     spanElement.classList.add(rowObject.colorPalette);
 
-    const buttonElements = rowElement.querySelectorAll('button');
+    fetchAudioFile(`https://raw.githubusercontent.com/marcus-rk/beatmaker/main/audio/${rowObject.audioType}`)
+        .then(audioBuffer => {
+            rowObject.audioBuffer = audioBuffer;
 
-    buttonElements.forEach(buttonElement => {
-        // preload audio for better performance on mobile or slower pc's
-        const audio = new Audio(`https://raw.githubusercontent.com/marcus-rk/beatmaker/main/audio/${rowObject.audioName}`);
-        audio.preload = 'auto';
-        audio.load();
+            const buttonElements = rowElement.querySelectorAll('button');
+            buttonElements.forEach(buttonElement => {
+                const buttonObject = {
+                    buttonElement: buttonElement,
+                    isActive: false,
+                    colorPalette: rowObject.colorPalette,
+                };
 
-        const buttonObject = {
-            buttonElement: buttonElement,
-            isActive: false,
-            audio: audio,
-            colorPalette: rowObject.colorPalette,
-        }
+                buttonElement.addEventListener('click', () => {
+                    buttonObject.isActive = !buttonObject.isActive;
+                    buttonElement.classList.toggle('active', buttonObject.isActive);
+                    buttonElement.classList.toggle(rowObject.colorPalette, buttonObject.isActive);
+                });
 
-        // Change status of buttonObject and buttonElement
-        buttonElement.addEventListener('click', () => {
-            buttonObject.isActive = !buttonObject.isActive;
-
-            buttonElement.classList.toggle('active' , buttonObject.isActive);
-            buttonElement.classList.toggle(rowObject.colorPalette, buttonObject.isActive);
+                rowObject.buttons.push(buttonObject);
+            });
         });
-
-        rowObject.buttons.push(buttonObject);
-    });
 
     sequencer.push(rowObject);
 });
-
-const playButton = document.querySelector('header button');
 
 playButton.addEventListener('click', togglePlay);
 document.addEventListener('keydown', (event) => {
     if (event.key === ' ' || event.key === 'Spacebar') {
         togglePlay();
-        event.preventDefault(); // Prevent scrolling behavior in some browsers
+        event.preventDefault();
     }
 });
 
+function fetchAudioFile(url) {
+    return fetch(url)
+        .then(response => response.arrayBuffer())
+        .then(data => audioContext.decodeAudioData(data));
+}
 
 function togglePlay() {
     isPlaying = !isPlaying;
@@ -119,25 +121,33 @@ function playLoop() {
             const currentRow = sequencer[i];
             const buttonObject = currentRow.buttons[beatIndex];
             const buttonElement = buttonObject.buttonElement;
+            let needClick = false;
 
             buttonElement.classList.add('playing');
 
             if (buttonObject.isActive) {
-                buttonObject.audio.play();
+                playSample(currentRow.audioBuffer);
                 buttonElement.click();
-                setTimeout(() => {
-                    buttonElement.click();
-                }, 150);
+                needClick = true;
             }
 
             setTimeout(() => {
+                if (needClick) {
+                    buttonElement.click();
+                }
                 buttonElement.classList.remove('playing');
             }, 150);
-
         }
 
         beatIndex = (beatIndex + 1) % beatsPerRow;
 
-        setTimeout(playLoop, (30 / BPM) * 1000); // 30 instead to make it double time
+        setTimeout(playLoop, (60000 / BPM) - 150);
     }
+}
+
+function playSample(audioBuffer) {
+    const sampleSource = audioContext.createBufferSource();
+    sampleSource.buffer = audioBuffer;
+    sampleSource.connect(audioContext.destination);
+    sampleSource.start();
 }
