@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Beatmaker</title>
-  <!-- <link rel="icon" href=""> -->
+  <!-- <link rel="icon" href=""> --> <!-- TODO: Add icon to browser -->
   <!--link css stylesheet -->
   <link href="styles.css" rel="stylesheet">
 </head>
@@ -16,13 +16,14 @@
   <h1>BEATMAKER</h1>
   <div class="bpm-control">
     <label for="bpm">BPM:</label>
-    <input type="number" id="bpm" value="120" min="40" max="240"> <!-- TODO: Metronome functinoality should be done -->
+    <input type="number" id="bpm" value="120" min="40" max="240">
   </div>
 </header>
 <main>
   <section class="sequencer">
 
-    <!-- 8 bar for desktop -->
+    <!------- 8 bar for desktop ------->
+    <!------- 4 bar for mobile -------->
     <div class="row">
       <span>Kick</span>
       <button></button>
@@ -56,7 +57,7 @@
       <button class="desktop"></button>
       <button class="desktop"></button>
     </div>
-
+    <!--------------------------------------->
     <div class="beat-counter">
       <span></span>
       <span class="first-beat">1</span>
