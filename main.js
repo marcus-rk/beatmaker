@@ -38,7 +38,7 @@ rowElements.forEach(rowElement => {
         colorPalette: '',
     };
 
-    // get audio type from row span name etc. kick, snare etc.
+    // get audio type from row span name etc. kick, snare, HH etc.
     switch (rowObject.name) {
         case 'Kick':
             rowObject.audioName = 'kick/kick_1.aac';
@@ -138,6 +138,6 @@ function playLoop() {
 
         beatIndex = (beatIndex + 1) % beatsPerRow;
 
-        setTimeout(playLoop, (30000 / BPM)); // Adjust the timing as needed
+        setTimeout(playLoop, (60000 / BPM));
     }
 }
