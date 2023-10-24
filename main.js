@@ -56,9 +56,6 @@ function initializeSequencer() {
                 rowObject.audioType = 'high-hat/high-hat_1.wav';
                 rowObject.colorPalette = 'high-hat';
                 break;
-            case 'Recorder':
-                rowObject.colorPalette = 'kick';
-                break;
         }
 
         // Add a CSS class to the span element to change its color based on the color palette
