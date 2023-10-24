@@ -6,7 +6,7 @@
     padding: 0;
     font-family: Arial, sans-serif;
     color: black;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
 }
 
 
@@ -125,7 +125,6 @@ main {
 
 .row button {
     background-color: #495057;
-    color: black; /* TODO: TEMP */
     cursor: pointer;
     border: 6px solid #212529;
     transition: background-color 0.15s, border 0.15s;
@@ -162,3 +161,42 @@ main {
       background-color: gold;
       border: 6px solid yellow;
   }
+
+.mobile {
+      display: none;
+}
+
+/************************************/
+/************ Media Query ***********/
+/************************************/
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .row span {
+        font-size: 18px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    button.desktop, span.desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: flex;
+    }
+
+    h1 {
+        display: none;
+    }
+
+    .row button,
+    .row span {
+        width: 18%;
+        font-size: 20px;
+    }
+
+    .beat-counter{
+        justify-content: space-around;
+    }
+}

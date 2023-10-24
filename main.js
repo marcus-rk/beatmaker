@@ -3,6 +3,8 @@
 let isPlaying = false; // default false
 let beatIndex = 0; // default 0
 let BPM = 120; // default 120
+let isMobile = window.innerWidth <= 768; // same as in CSS
+
 
 const bpmInputElement = document.getElementById('bpm');
 
@@ -18,6 +20,10 @@ bpmInputElement.addEventListener('change', () => {
 
     bpmInputElement.value = newBPM;
     BPM = bpmInputElement.value;
+});
+
+window.addEventListener('resize', () => {
+    isMobile = window.innerWidth <= 768;
 });
 
 const sequencerElement = document.querySelector('.sequencer');
@@ -103,7 +109,7 @@ function togglePlay() {
 function playLoop() {
     if (isPlaying) {
         const numberOfRows = sequencer.length;
-        const beatsPerRow = 8; // Fixed number of 8 buttons in each row
+        const beatsPerRow = isMobile ? 4 : 8;
 
         for (let i = 0; i < numberOfRows; i++) {
             const currentRow = sequencer[i];
