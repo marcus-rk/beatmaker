@@ -59,10 +59,15 @@ rowElements.forEach(rowElement => {
     const buttonElements = rowElement.querySelectorAll('button')
 
     buttonElements.forEach(buttonElement => {
+        // preload audio for better performance on mobile or slower pc's
+        const audio = new Audio(`https://raw.githubusercontent.com/marcus-rk/beatmaker/main/audio/${rowObject.audioName}`);
+        audio.preload = 'auto';
+        audio.load();
+
         const buttonObject = {
             buttonElement: buttonElement, // TODO: is this needed?
             isActive: false,
-            audio: new Audio(`https://raw.githubusercontent.com/marcus-rk/beatmaker/main/audio/${rowObject.audioName}`),
+            audio: audio,
             colorPalette: rowObject.colorPalette,
         }
 
