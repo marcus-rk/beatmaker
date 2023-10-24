@@ -1,6 +1,7 @@
 // Makj0005
 
 // Create an AudioContext (works like an audio engine/factory)
+// This solution uses the Web Audio API
 const audioContext = new (window.AudioContext || window.webkitAudioContext);
 
 // Define global constants and variables
@@ -22,8 +23,8 @@ window.addEventListener('resize', handleResize);
 document.addEventListener('keydown', handleSpacebar);
 playButton.addEventListener('click', togglePlay);
 
-// Initialize the sequencer
-initializeSequencer()
+// Start initialization of the sequencer
+initializeSequencer();
 
 /**
  * Initializes the sequencer by creating row objects: containing
@@ -34,6 +35,7 @@ function initializeSequencer() {
     // Iterate through each row in the sequencer
     rowElements.forEach(rowElement => {
         const spanElement = rowElement.querySelector('span');
+
         const rowObject = {
             name: spanElement.innerText, // Get the name of the row
             buttons: [],
@@ -58,7 +60,7 @@ function initializeSequencer() {
                 break;
         }
 
-        // Add a CSS class to the span element to change its color based on the color palette
+        // Add a CSS class to the row span element to change its color based on the color palette
         spanElement.classList.add(rowObject.colorPalette);
 
         // Fetch and decode the audio file for this row
@@ -67,6 +69,7 @@ function initializeSequencer() {
                 rowObject.audioBuffer = audioBuffer; // Store the audio buffer in the row object
 
                 const buttonElements = rowElement.querySelectorAll('button');
+
                 buttonElements.forEach(buttonElement => {
                     const buttonObject = {
                         buttonElement: buttonElement,
