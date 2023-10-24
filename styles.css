@@ -169,8 +169,9 @@ button.high-hat{
   }
 
 .playing {
-    background-color: #FDFAF6;
-    border: 6px solid #EFF8FF;
+    background-color: #e8e8e8;
+    border: 6px solid #b7b7b7;
+
 }
 
 /************************************/
