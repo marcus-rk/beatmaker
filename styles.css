@@ -143,16 +143,17 @@ button {
 button.kick {
     background-color: #DF2E38;
     border: 6px solid #850000;
+    box-shadow: 0 5px 15px rgba(133, 0, 0, 0.5);
 } button.kick:hover, .kick:hover {
       background-color: #850000;
       border: 6px solid #DF2E38;
-
   }
 
 .snare,
 button.snare{
     background-color: #e6adec;
     border: 6px solid #c287e8;
+    box-shadow: 0 5px 15px rgba(194, 135, 232, 0.5);
 } button.snare:hover, .snare:hover {
       background-color: #c287e8;
       border: 6px solid #e6adec;
@@ -162,6 +163,7 @@ button.snare{
 button.high-hat{
     background-color: #f2e863;
     border: 6px solid #f2cd60;
+    box-shadow: 0 5px 15px rgba(242, 205, 96, 0.5);
 } .row button.high-hat:hover,
   .high-hat:hover {
       background-color: #f2cd60;
@@ -171,7 +173,7 @@ button.high-hat{
 .playing {
     background-color: #e8e8e8;
     border: 6px solid #b7b7b7;
-
+    box-shadow: 0 5px 15px rgba(183, 183, 183, 0.5);
 }
 
 /************************************/
