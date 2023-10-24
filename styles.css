@@ -35,10 +35,15 @@ header button,
     padding: 12px 24px;
     cursor: pointer;
     transition-duration: 0.15s;
-} header button:hover {
+} header button {
+      white-space: nowrap;
+      width: 108px;
+  } header button:hover {
       background-color: #0BBF38;
       border: 4px solid green;
+      color: black;
   }
+
 
 .bpm-control label {
     color: lightgray;
@@ -132,16 +137,18 @@ main {
 .row button.kick {
     background-color: red;
     border: 6px solid darkred;
-} .row button.kick:hover {
+    color: black;
+} .row button.kick:hover, .kick:hover {
       background-color: darkred;
       border: 6px solid red;
+      color: lightgray;
   }
 
 .snare,
 .row button.snare{
     background-color: orange;
     border: 6px solid darkorange;
-} .row button.snare:hover {
+} .row button.snare:hover, .snare:hover {
       background-color: darkorange;
       border: 6px solid orange;
   }
@@ -150,7 +157,8 @@ main {
 .row button.high-hat{
     background-color: yellow;
     border: 6px solid gold;
-} .row button.high-hat:hover {
+} .row button.high-hat:hover,
+  .high-hat:hover {
       background-color: gold;
       border: 6px solid yellow;
   }

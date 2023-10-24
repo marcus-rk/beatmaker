@@ -91,9 +91,11 @@ function togglePlay() {
 
     if (isPlaying) {
         playButton.innerText = 'Stop';
+        playButton.classList.add('kick');
         playLoop();
     } else {
         playButton.innerText = 'Play';
+        playButton.classList.remove('kick');
         beatIndex = 0;
     }
 }
