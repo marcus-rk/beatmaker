@@ -1,7 +1,7 @@
 // Makj0005
 
-// Create an AudioContext
-const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+// Create an AudioContext (works like an audio engine/factory)
+const audioContext = new (window.AudioContext || window.webkitAudioContext);
 
 // Define global constants and variables
 const sequencer = [];
@@ -128,12 +128,30 @@ function playLoop() {
     }
 }
 
+/**
+ * Fetches an audio file from the given URL,
+ * Convert the response data to an array buffer.
+ * Decodes the array buffer with the Audio Context and converts it into an AudioBuffer.
+ *
+ * @param {string} url - The URL of the audio file to fetch.
+ * @returns {Promise<AudioBuffer>} A Promise that resolves to the decoded audio data as an AudioBuffer.
+ */
 function fetchAudioFile(url) {
     return fetch(url)
         .then(response => response.arrayBuffer())
-        .then(data => audioContext.decodeAudioData(data));
+        .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer));
 }
 
+/**
+ * Play an audio sample using the Web Audio API.
+ *
+ * Create a BufferSource node with the audio context
+ * Assign the audio buffer to the BufferSource node
+ * Connect the BufferSource node to the audio destination (output device)
+ * Start playing the audio
+ *
+ * @param {AudioBuffer} audioBuffer - The sound sample to be played.
+ */
 function playSample(audioBuffer) {
     const sampleSource = audioContext.createBufferSource();
     sampleSource.buffer = audioBuffer;
