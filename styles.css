@@ -13,7 +13,7 @@
 body,
 main,
 header {
-    background-color: #021C26;
+    background-color: #E5DCBA;
 }
 
 header {
@@ -22,14 +22,14 @@ header {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    border-bottom: 4px solid #0BBF38;
+    border-bottom: 6px solid #934C38;
 }
 
 header button,
 .bpm-control {
-    background-color: green;
-    border: 4px solid #0BBF38;
-    color: lightgray;
+    background-color: #79AC78;
+    border: 4px solid #618264;
+    color: #D0E7D2;
     font-weight: bold;
     border-radius: 12px;
     padding: 12px 24px;
@@ -39,29 +39,28 @@ header button,
       white-space: nowrap;
       width: 108px;
   } header button:hover {
-      background-color: #0BBF38;
-      border: 4px solid green;
-      color: black;
+      background-color: #618264;
+      border: 4px solid #79AC78;
   }
 
 
 .bpm-control label {
-    color: lightgray;
+    color: #D0E7D2;
     font-weight: bold;
     margin-right: 10px;
 }
 
 .bpm-control input {
-    background-color: #021C26;
-    border: 4px solid #0BBF38;
-    color: lightgray;
+    background-color: #E5DCBA;
+    border: 4px solid #4C4343;
+    color: #1B1414;
     border-radius: 12px;
     padding: 4px;
 }
 
 h1 {
-    font-size: 2.3rem;
-    color: #0BBF38;
+    font-size: 2.5rem;
+    color: #4C4343;
 }
 
 main {
@@ -71,7 +70,8 @@ main {
 }
 
 .sequencer {
-    background-color: gray;
+    background-color: #403C3D;
+    border: 4px solid #1B1414;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
     width: 95%;
     padding-top: 2%;
@@ -91,14 +91,14 @@ main {
 }
 
 .beat-counter {
-    background-color: #2e659b;
+    background-color: #934C38;
     display: flex;
     align-items: center;
     justify-content: end;
     width: 100%;
     margin-top: 12px;
     border-radius: 0 0 12px 12px;
-    border-top: 4px solid #0BBF38;
+    border-top: 4px solid #E5DCBA;
 }
 
 .beat-counter span {
@@ -106,10 +106,12 @@ main {
     padding: 12px 0;
     margin-right: 0.85%;
     text-align: center;
+    color: #1B1414;
 }
 
-.first-beat {
+span.first-beat {
     font-weight: bold;
+    color: #E5DCBA;
 }
 
 .row span,
@@ -125,6 +127,7 @@ main {
 
 .row button {
     background-color: #495057;
+    color: #1B1414;
     cursor: pointer;
     border: 6px solid #212529;
     transition: background-color 0.15s, border 0.15s;
@@ -134,37 +137,31 @@ main {
 
 .kick,
 .row button.kick {
-    background-color: red;
-    border: 6px solid darkred;
-    color: black;
+    background-color: #FF2C21;
+    border: 6px solid #FF6961;
 } .row button.kick:hover, .kick:hover {
-      background-color: darkred;
-      border: 6px solid red;
-      color: lightgray;
+      background-color: #FF6961;
+      border: 6px solid #FF2C21;
   }
 
 .snare,
 .row button.snare{
-    background-color: orange;
-    border: 6px solid darkorange;
+    background-color: #e6adec;
+    border: 6px solid #c287e8;
 } .row button.snare:hover, .snare:hover {
-      background-color: darkorange;
-      border: 6px solid orange;
+      background-color: #c287e8;
+      border: 6px solid #e6adec;
   }
 
 .high-hat,
 .row button.high-hat{
-    background-color: yellow;
-    border: 6px solid gold;
+    background-color: #f2e863;
+    border: 6px solid #f2cd60;
 } .row button.high-hat:hover,
   .high-hat:hover {
-      background-color: gold;
-      border: 6px solid yellow;
+      background-color: #f2cd60;
+      border: 6px solid #f2e863;
   }
-
-.mobile {
-      display: none;
-}
 
 /************************************/
 /************ Media Query ***********/
