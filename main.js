@@ -138,6 +138,6 @@ function playLoop() {
 
         beatIndex = (beatIndex + 1) % beatsPerRow;
 
-        setTimeout(playLoop, (60 / BPM) * 1000);
+        setTimeout(playLoop, (30 / BPM) * 1000); // 30 instead to make it double time
     }
 }
