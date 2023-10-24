@@ -1,5 +1,24 @@
 // makj0005
 
+let isPlaying = false; // default false
+let beatIndex = 0; // default 0
+let BPM = 120; // default 120
+
+const bpmInputElement = document.getElementById('bpm');
+
+bpmInputElement.addEventListener('change', () => {
+    let newBPM = bpmInputElement.value;
+
+    // Ensure the newBPM value is within the valid range
+    if (newBPM < 40) {
+        newBPM = 40;
+    } else if (newBPM > 240) {
+        newBPM = 240;
+    }
+
+    bpmInputElement.value = newBPM;
+    BPM = bpmInputElement.value;
+});
 
 const sequencerElement = document.querySelector('.sequencer');
 const rowElements = sequencerElement.querySelectorAll('.row')
@@ -66,22 +85,18 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-let isPlaying = false;
 
 function togglePlay() {
     isPlaying = !isPlaying;
 
     if (isPlaying) {
-        playButton.textText = 'Stop';
+        playButton.innerText = 'Stop';
         playLoop();
     } else {
-        playButton.textText = 'Play';
+        playButton.innerText = 'Play';
         beatIndex = 0;
     }
 }
-
-let beatIndex = 0;
-const BPM = 120; // TODO: dynamic in future
 
 function playLoop() {
     if (isPlaying) {
