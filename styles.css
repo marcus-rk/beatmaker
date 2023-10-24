@@ -200,11 +200,7 @@ main {
         justify-content: space-around;
     }
 
-    header {
-        height: 8rem;
-    }
-
     .sequencer {
-        margin-top: 16%;
+        margin-top: 75px;
     }
 }
