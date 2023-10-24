@@ -5,7 +5,6 @@ let beatIndex = 0; // default 0
 let BPM = 120; // default 120
 let isMobile = window.innerWidth <= 768; // same as in CSS
 
-
 const bpmInputElement = document.getElementById('bpm');
 
 bpmInputElement.addEventListener('change', () => {
