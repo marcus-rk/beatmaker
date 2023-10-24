@@ -62,7 +62,7 @@ rowElements.forEach(rowElement => {
         const buttonObject = {
             buttonElement: buttonElement, // TODO: is this needed?
             isActive: false,
-            audio: new Audio(`https://github.com/marcus-rk/beatmaker/raw/main/audio/${rowObject.audioName}`),
+            audio: new Audio(`https://raw.githubusercontent.com/marcus-rk/beatmaker/main/audio/${rowObject.audioName}`),
             colorPalette: rowObject.colorPalette,
         }
 
