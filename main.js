@@ -25,18 +25,23 @@ playButton.addEventListener('click', togglePlay);
 // Initialize the sequencer
 initializeSequencer()
 
+/**
+ * Initializes the sequencer by creating row objects: containing
+ * loaded audio data, color palette and button objects.
+ */
 function initializeSequencer() {
+
+    // Iterate through each row in the sequencer
     rowElements.forEach(rowElement => {
         const spanElement = rowElement.querySelector('span');
-
         const rowObject = {
-            name: spanElement.innerText,
+            name: spanElement.innerText, // Get the name of the row
             buttons: [],
-            audioBuffer: null, // audio file ready to be played
-            audioType: '',
+            audioBuffer: null,
             colorPalette: '',
         };
 
+        // Determine the audio type and color palette based on row name
         switch (rowObject.name) {
             case 'Kick':
                 rowObject.audioType = 'kick/kick_1.wav';
@@ -52,34 +57,43 @@ function initializeSequencer() {
                 break;
         }
 
+        // Add a CSS class to the span element to change its color based on the color palette
         spanElement.classList.add(rowObject.colorPalette);
 
+        // Fetch and decode the audio file for this row
         fetchAudioFile(`https://raw.githubusercontent.com/marcus-rk/beatmaker/main/audio/${rowObject.audioType}`)
             .then(audioBuffer => {
-                rowObject.audioBuffer = audioBuffer;
+                rowObject.audioBuffer = audioBuffer; // Store the audio buffer in the row object
 
                 const buttonElements = rowElement.querySelectorAll('button');
                 buttonElements.forEach(buttonElement => {
                     const buttonObject = {
                         buttonElement: buttonElement,
                         isActive: false,
-                        colorPalette: rowObject.colorPalette,
+                        colorPalette: rowObject.colorPalette, // Set the color palette
                     };
 
+                    // Add a click event listener to toggle the button's active state and update its appearance
                     buttonElement.addEventListener('click', () => {
                         buttonObject.isActive = !buttonObject.isActive;
                         buttonElement.classList.toggle('active', buttonObject.isActive);
                         buttonElement.classList.toggle(rowObject.colorPalette, buttonObject.isActive);
                     });
 
+                    // Add the button object to the row objects' buttons array
                     rowObject.buttons.push(buttonObject);
                 });
             });
 
+        // Add the row object to the sequencer array
         sequencer.push(rowObject);
     });
 }
 
+/**
+ * Toggles the playing state of the sequencer, starting or stopping the playback loop.
+ * This also updates the playButton element
+ */
 function togglePlay() {
     isPlaying = !isPlaying;
 
@@ -94,6 +108,12 @@ function togglePlay() {
     }
 }
 
+/**
+ * Controls the main playback loop by:
+ * - Triggering instrument sounds for active buttons in each row.
+ * - Managing UI for the playing buttons.
+ * - Scheduling the next loop iteration based on the selected BPM (Beats Per Minute).
+ */
 function playLoop() {
     if (isPlaying) {
         const numberOfRows = sequencer.length;
@@ -159,6 +179,10 @@ function playSample(audioBuffer) {
     sampleSource.start();
 }
 
+/**
+ * Handles changes to the BPM input field, ensuring the new BPM value is within a valid range.
+ * range is: 40-240 BPM (this is also set in the HTML attributes)
+ */
 function handleBPMChange() {
     let newBPM = bpmInputElement.value;
 
@@ -172,15 +196,22 @@ function handleBPMChange() {
     BPM = bpmInputElement.value;
 }
 
-// Function to handle window resize
+/**
+ * Updates the isMobile boolean based on the current window size,
+ * adapting for mobile or desktop view.
+ */
 function handleResize() {
     isMobile = window.innerWidth <= 768;
 }
 
-// Function to handle spacebar press
+/**
+ * Listens for the spacebar key press and toggles play/pause when spacebar is pressed.
+ *
+ * @param {KeyboardEvent} event - The keyboard event object.
+ */
 function handleSpacebar(event) {
     if (event.key === ' ' || event.key === 'Spacebar') {
         togglePlay();
-        event.preventDefault();
+        event.preventDefault(); // to prevent scroll-down on some browsers and devices
     }
 }
