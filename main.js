@@ -16,86 +16,66 @@ const playButton = document.querySelector('header button');
 const sequencerElement = document.querySelector('.sequencer');
 const rowElements = sequencerElement.querySelectorAll('.row');
 
-bpmInputElement.addEventListener('change', () => {
-    let newBPM = bpmInputElement.value;
-
-    if (newBPM < 40) {
-        newBPM = 40;
-    } else if (newBPM > 240) {
-        newBPM = 240;
-    }
-
-    bpmInputElement.value = newBPM;
-    BPM = bpmInputElement.value;
-});
-
-window.addEventListener('resize', () => {
-    isMobile = window.innerWidth <= 768;
-});
-
-rowElements.forEach(rowElement => {
-    const spanElement = rowElement.querySelector('span');
-    const rowObject = {
-        name: spanElement.innerText,
-        buttons: [],
-        audioBuffer: null,
-        colorPalette: '',
-    };
-
-    switch (rowObject.name) {
-        case 'Kick':
-            rowObject.audioType = 'kick/kick_1.wav';
-            rowObject.colorPalette = 'kick';
-            break;
-        case 'Snare':
-            rowObject.audioType = 'snare/snare_1.wav';
-            rowObject.colorPalette = 'snare';
-            break;
-        case 'High-hat':
-            rowObject.audioType = 'high-hat/high-hat_1.wav';
-            rowObject.colorPalette = 'high-hat';
-            break;
-    }
-
-    spanElement.classList.add(rowObject.colorPalette);
-
-    fetchAudioFile(`https://raw.githubusercontent.com/marcus-rk/beatmaker/main/audio/${rowObject.audioType}`)
-        .then(audioBuffer => {
-            rowObject.audioBuffer = audioBuffer;
-
-            const buttonElements = rowElement.querySelectorAll('button');
-            buttonElements.forEach(buttonElement => {
-                const buttonObject = {
-                    buttonElement: buttonElement,
-                    isActive: false,
-                    colorPalette: rowObject.colorPalette,
-                };
-
-                buttonElement.addEventListener('click', () => {
-                    buttonObject.isActive = !buttonObject.isActive;
-                    buttonElement.classList.toggle('active', buttonObject.isActive);
-                    buttonElement.classList.toggle(rowObject.colorPalette, buttonObject.isActive);
-                });
-
-                rowObject.buttons.push(buttonObject);
-            });
-        });
-
-    sequencer.push(rowObject);
-});
-
+// Event listeners
+bpmInputElement.addEventListener('change', handleBPMChange);
+window.addEventListener('resize', handleResize);
+document.addEventListener('keydown', handleSpacebar);
 playButton.addEventListener('click', togglePlay);
-document.addEventListener('keydown', (event) => {
-    if (event.key === ' ' || event.key === 'Spacebar') {
-        togglePlay();
-        event.preventDefault();
-    }
-});
 
-function fetchAudioFile(url) {
-    return fetch(url)
-        .then(response => response.arrayBuffer())
-        .then(data => audioContext.decodeAudioData(data));
+// Initialize the sequencer
+initializeSequencer()
+
+function initializeSequencer() {
+    rowElements.forEach(rowElement => {
+        const spanElement = rowElement.querySelector('span');
+        const rowObject = {
+            name: spanElement.innerText,
+            buttons: [],
+            audioBuffer: null,
+            colorPalette: '',
+        };
+
+        switch (rowObject.name) {
+            case 'Kick':
+                rowObject.audioType = 'kick/kick_1.wav';
+                rowObject.colorPalette = 'kick';
+                break;
+            case 'Snare':
+                rowObject.audioType = 'snare/snare_1.wav';
+                rowObject.colorPalette = 'snare';
+                break;
+            case 'High-hat':
+                rowObject.audioType = 'high-hat/high-hat_1.wav';
+                rowObject.colorPalette = 'high-hat';
+                break;
+        }
+
+        spanElement.classList.add(rowObject.colorPalette);
+
+        fetchAudioFile(`https://raw.githubusercontent.com/marcus-rk/beatmaker/main/audio/${rowObject.audioType}`)
+            .then(audioBuffer => {
+                rowObject.audioBuffer = audioBuffer;
+
+                const buttonElements = rowElement.querySelectorAll('button');
+                buttonElements.forEach(buttonElement => {
+                    const buttonObject = {
+                        buttonElement: buttonElement,
+                        isActive: false,
+                        colorPalette: rowObject.colorPalette,
+                    };
+
+                    buttonElement.addEventListener('click', () => {
+                        buttonObject.isActive = !buttonObject.isActive;
+                        buttonElement.classList.toggle('active', buttonObject.isActive);
+                        buttonElement.classList.toggle(rowObject.colorPalette, buttonObject.isActive);
+                    });
+
+                    rowObject.buttons.push(buttonObject);
+                });
+            });
+
+        sequencer.push(rowObject);
+    });
 }
 
 function togglePlay() {
@@ -116,6 +96,7 @@ function playLoop() {
     if (isPlaying) {
         const numberOfRows = sequencer.length;
         const beatsPerRow = isMobile ? 4 : 8;
+        const timeOutBuffer = 150;
 
         for (let i = 0; i < numberOfRows; i++) {
             const currentRow = sequencer[i];
@@ -136,13 +117,19 @@ function playLoop() {
                     buttonElement.click();
                 }
                 buttonElement.classList.remove('playing');
-            }, 150);
+            }, timeOutBuffer);
         }
 
         beatIndex = (beatIndex + 1) % beatsPerRow;
 
-        setTimeout(playLoop, (60000 / BPM) - 150);
+        setTimeout(playLoop, (60000 / BPM) - timeOutBuffer);
     }
+}
+
+function fetchAudioFile(url) {
+    return fetch(url)
+        .then(response => response.arrayBuffer())
+        .then(data => audioContext.decodeAudioData(data));
 }
 
 function playSample(audioBuffer) {
@@ -150,4 +137,30 @@ function playSample(audioBuffer) {
     sampleSource.buffer = audioBuffer;
     sampleSource.connect(audioContext.destination);
     sampleSource.start();
+}
+
+function handleBPMChange() {
+    let newBPM = bpmInputElement.value;
+
+    if (newBPM < 40) {
+        newBPM = 40;
+    } else if (newBPM > 240) {
+        newBPM = 240;
+    }
+
+    bpmInputElement.value = newBPM;
+    BPM = bpmInputElement.value;
+}
+
+// Function to handle window resize
+function handleResize() {
+    isMobile = window.innerWidth <= 768;
+}
+
+// Function to handle spacebar press
+function handleSpacebar(event) {
+    if (event.key === ' ' || event.key === 'Spacebar') {
+        togglePlay();
+        event.preventDefault();
+    }
 }
