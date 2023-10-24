@@ -127,39 +127,39 @@ span.first-beat {
     font-weight: bold;
 }
 
-.row button {
+button {
     background-color: #495057;
     color: #1B1414;
     cursor: pointer;
     border: 6px solid #212529;
     transition: background-color 0.15s, border 0.15s;
-} .row button:hover {
+} button:hover {
       background-color: #6c757d;
       transform: scale(1.05);
       box-shadow: 0 0 10px 0 rgba(0,0,0,0.4);
   }
 
 .kick,
-.row button.kick {
+button.kick {
     background-color: #FF2C21;
     border: 6px solid #FF6961;
-} .row button.kick:hover, .kick:hover {
+} button.kick:hover, .kick:hover {
       background-color: #FF6961;
       border: 6px solid #FF2C21;
 
   }
 
 .snare,
-.row button.snare{
+button.snare{
     background-color: #e6adec;
     border: 6px solid #c287e8;
-} .row button.snare:hover, .snare:hover {
+} button.snare:hover, .snare:hover {
       background-color: #c287e8;
       border: 6px solid #e6adec;
   }
 
 .high-hat,
-.row button.high-hat{
+button.high-hat{
     background-color: #f2e863;
     border: 6px solid #f2cd60;
 } .row button.high-hat:hover,
@@ -167,6 +167,11 @@ span.first-beat {
       background-color: #f2cd60;
       border: 6px solid #f2e863;
   }
+
+.playing {
+    background-color: white;
+    border: 6px solid darkgray;
+}
 
 /************************************/
 /************ Media Query ***********/

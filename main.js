@@ -60,7 +60,7 @@ rowElements.forEach(rowElement => {
 
     buttonElements.forEach(buttonElement => {
         const buttonObject = {
-            id: buttonElement.id, // TODO: is this needed?
+            buttonElement: buttonElement, // TODO: is this needed?
             isActive: false,
             audio: new Audio(`/audio/${rowObject.audioType}`),
             colorPalette: rowObject.colorPalette,
@@ -112,11 +112,23 @@ function playLoop() {
 
         for (let i = 0; i < numberOfRows; i++) {
             const currentRow = sequencer[i];
-            const currentButton = currentRow.buttons[beatIndex];
+            const buttonObject = currentRow.buttons[beatIndex];
+            const buttonElement = buttonObject.buttonElement;
 
-            if (currentButton.isActive) {
-                currentButton.audio.play();
+            buttonElement.classList.add('playing');
+
+            if (buttonObject.isActive) {
+                buttonObject.audio.play();
+                buttonElement.click();
+                setTimeout(() => {
+                    buttonElement.click();
+                }, 150);
             }
+
+            setTimeout(() => {
+                buttonElement.classList.remove('playing');
+            }, 150);
+
         }
 
         beatIndex = (beatIndex + 1) % beatsPerRow;
