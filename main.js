@@ -41,15 +41,15 @@ rowElements.forEach(rowElement => {
     // get audio type from row span name etc. kick, snare etc.
     switch (rowObject.name) {
         case 'Kick':
-            rowObject.audioName = 'kick/kick_1.wav';
+            rowObject.audioName = 'kick/kick_1.aac';
             rowObject.colorPalette = 'kick';
             break;
         case 'Snare':
-            rowObject.audioName = 'snare/snare_1.wav';
+            rowObject.audioName = 'snare/snare_1.aac';
             rowObject.colorPalette = 'snare';
             break;
         case 'High-hat':
-            rowObject.audioName = 'high-hat/high-hat_1.wav';
+            rowObject.audioName = 'high-hat/high-hat_1.acc';
             rowObject.colorPalette = 'high-hat';
             break;
     }
