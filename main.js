@@ -41,31 +41,31 @@ rowElements.forEach(rowElement => {
     // get audio type from row span name etc. kick, snare etc.
     switch (rowObject.name) {
         case 'Kick':
-            rowObject.audioName = 'kick/kick_1.mp3';
+            rowObject.audioName = 'kick/kick_1.aac';
             rowObject.colorPalette = 'kick';
             break;
         case 'Snare':
-            rowObject.audioName = 'snare/snare_1.mp3';
+            rowObject.audioName = 'snare/snare_1.aac';
             rowObject.colorPalette = 'snare';
             break;
         case 'High-hat':
-            rowObject.audioName = 'high-hat/high-hat_1.mp3';
+            rowObject.audioName = 'high-hat/high-hat_1.aac';
             rowObject.colorPalette = 'high-hat';
             break;
     }
 
     spanElement.classList.add(rowObject.colorPalette);
 
-    // preload audio for better performance on mobile or slower pc's
-    const audio = new Audio(`https://raw.githubusercontent.com/marcus-rk/beatmaker/main/audio/${rowObject.audioName}`);
-    audio.preload = 'auto';
-    audio.load();
-
     const buttonElements = rowElement.querySelectorAll('button');
 
     buttonElements.forEach(buttonElement => {
+        // preload audio for better performance on mobile or slower pc's
+        const audio = new Audio(`https://raw.githubusercontent.com/marcus-rk/beatmaker/main/audio/${rowObject.audioName}`);
+        audio.preload = 'auto';
+        audio.load();
+
         const buttonObject = {
-            buttonElement: buttonElement, // TODO: is this needed?
+            buttonElement: buttonElement,
             isActive: false,
             audio: audio,
             colorPalette: rowObject.colorPalette,
