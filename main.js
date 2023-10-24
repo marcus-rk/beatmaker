@@ -28,10 +28,12 @@ initializeSequencer()
 function initializeSequencer() {
     rowElements.forEach(rowElement => {
         const spanElement = rowElement.querySelector('span');
+
         const rowObject = {
             name: spanElement.innerText,
             buttons: [],
-            audioBuffer: null,
+            audioBuffer: null, // audio file ready to be played
+            audioType: '',
             colorPalette: '',
         };
 
