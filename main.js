@@ -38,6 +38,7 @@ function initializeSequencer() {
             name: spanElement.innerText, // Get the name of the row
             buttons: [],
             audioBuffer: null,
+            audioType: '',
             colorPalette: '',
         };
 
@@ -54,6 +55,9 @@ function initializeSequencer() {
             case 'High-hat':
                 rowObject.audioType = 'high-hat/high-hat_1.wav';
                 rowObject.colorPalette = 'high-hat';
+                break;
+            case 'Recorder':
+                rowObject.colorPalette = 'kick';
                 break;
         }
 
