@@ -31,10 +31,13 @@ initializeSequencer();
  * loaded audio data, color palette and button objects.
  */
 function initializeSequencer() {
+    // Iterate through each row element in the sequencer
     rowElements.forEach(rowElement => {
         const rowObject = createRowObject(rowElement);
+        // Construct the URL for the audio file of this row. (This is a raw url to GitHub repo)
         const url = `https://raw.githubusercontent.com/marcus-rk/beatmaker/main/audio/${rowObject.audioType}`;
 
+        // Fetch and decode the audio file into an audio buffer
         fetchAudioFile(url)
             .then(audioBuffer => {
                 rowObject.audioBuffer = audioBuffer;
@@ -62,13 +65,14 @@ function createRowObject(rowElement) {
     const name = spanElement.innerText;
 
     const rowObject = {
-        name,
+        name: name,
         buttons: [],
         audioBuffer: null,
         audioType: '',
         colorPalette: '',
     };
 
+    // Determine the audio type and color palette based on the row name
     switch (name) {
         case 'Kick':
             rowObject.audioType = 'kick/kick_1.wav';
@@ -84,7 +88,9 @@ function createRowObject(rowElement) {
             break;
     }
 
+    // Add a CSS class to the row span element to change its color based on the color palette
     spanElement.classList.add(rowObject.colorPalette);
+
     return rowObject;
 }
 
@@ -102,6 +108,7 @@ function createButtonObject(buttonElement, colorPalette) {
         colorPalette: colorPalette,
     };
 
+    // Add a click event listener to toggle the button's active state and update its appearance
     buttonElement.addEventListener('click', () => {
         buttonObject.isActive = !buttonObject.isActive;
         buttonElement.classList.toggle('active', buttonObject.isActive);
@@ -141,20 +148,24 @@ function playLoop() {
         const beatsPerRow = isMobile ? 4 : 8;
         const timeOutBuffer = 150;
 
+        // Iterate through each row in the sequencer
         for (let i = 0; i < numberOfRows; i++) {
             const currentRow = sequencer[i];
             const buttonObject = currentRow.buttons[beatIndex];
             const buttonElement = buttonObject.buttonElement;
             let needClick = false;
 
+            // Add 'playing' css to the button for visual feedback
             buttonElement.classList.add('playing');
 
+            // If the button is active, play the audio sample and remove color palette by click
             if (buttonObject.isActive) {
                 playSample(currentRow.audioBuffer);
                 buttonElement.click();
                 needClick = true;
             }
 
+            // After timeout, remove 'playing' css and add color palette by button click if needed
             setTimeout(() => {
                 if (needClick) {
                     buttonElement.click();
@@ -163,8 +174,10 @@ function playLoop() {
             }, timeOutBuffer);
         }
 
+        // Move to the next beat in the sequence
         beatIndex = (beatIndex + 1) % beatsPerRow;
 
+        // Schedule the next loop iteration based on the selected BPM
         setTimeout(playLoop, (60000 / BPM) - timeOutBuffer);
     }
 }
