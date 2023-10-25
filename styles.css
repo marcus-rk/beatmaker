@@ -27,6 +27,11 @@
     --button-hover: #618264;
     --button-shadow: rgba(0, 0, 0, 0.25);
 
+    /* BPM screen colors */
+    --screen-bg: #2D4E66;
+    --screen-border: #698498;
+    --screen-text: #b5c2cc;
+
     /* Label and Input Colors */
     --label-text: #D0E7D2;
     --input-bg: #E5DCBA;
@@ -34,7 +39,7 @@
     --input-text: #1B1414;
 
     /* Heading and Sequencer Colors */
-    --heading-text: #4C4343;
+    --heading-text: #E5DCBA;
     --sequencer-bg: #403C3D;
     --sequencer-border: #1B1414;
     --sequencer-shadow: rgba(0, 0, 0, 0.7);
@@ -76,8 +81,7 @@
 /********************************************/
 
 body,
-main,
-header {
+main {
     background-color: var(--background-color);
 }
 
@@ -87,24 +91,32 @@ header {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    border-top: 6px solid var(--border-color);
     border-bottom: 6px solid var(--border-color);
+    background-color: var(--row-border)
 }
 
 header button,
 .bpm-control {
-    background-color: var(--button-bg);
-    border: 4px solid var(--button-border);
-    color: var(--button-text);
     font-weight: bold;
-    border-radius: 12px;
     padding: 12px 24px;
     cursor: pointer;
     transition-duration: 0.15s;
 }
 
+.bpm-control {
+    background-color: var(--screen-bg);
+    border: 4px solid var(--screen-border);
+    border-radius: 8px;
+}
+
 header button {
     white-space: nowrap;
     width: 108px;
+    background-color: var(--button-bg);
+    border: 4px solid var(--button-border);
+    border-radius: 12px;
+    color: var(--button-text);
 }  header button:hover {
     background-color: var(--button-hover);
     border: 4px solid var(--button-border);
@@ -113,14 +125,14 @@ header button {
 }
 
 .bpm-control label {
-    color: var(--label-text);
+    color: var(--screen-text);
     font-weight: bold;
     margin-right: 10px;
 }
 
 .bpm-control input {
-    background-color: var(--input-bg);
-    border: 4px solid var(--input-border);
+    background-color: var(--screen-text);
+    border: 4px solid var(--screen-border);
     color: var(--input-text);
     width: 65px;
     border-radius: 12px;
@@ -133,6 +145,7 @@ h1 {
 }
 
 main {
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -144,7 +157,6 @@ main {
     box-shadow: 0 0 10px 0 var(--sequencer-shadow);
     width: 95%;
     padding-top: 2%;
-    margin: 5% 0;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
@@ -278,9 +290,5 @@ button.high-hat {
 
     .beat-counter {
         justify-content: space-around;
-    }
-
-    .sequencer {
-        margin-top: 75px;
     }
 }
