@@ -10,7 +10,10 @@
     user-select: none;
 }
 
+/********************************************/
 /* Color palette variables */
+/********************************************/
+
 :root {
     /* Text and General Colors */
     --text-color: #1B1414;
@@ -68,6 +71,10 @@
     --playing-glow: 0 5px 15px var(--playing-border);
 }
 
+/********************************************/
+/* Main CSS section underneath */
+/********************************************/
+
 body,
 main,
 header {
@@ -98,9 +105,7 @@ header button,
 header button {
     white-space: nowrap;
     width: 108px;
-}
-
-header button:hover {
+}  header button:hover {
     background-color: var(--button-hover);
     border: 4px solid var(--button-border);
     transform: scale(1.05);
@@ -195,9 +200,7 @@ button {
     cursor: pointer;
     border: 6px solid var(--row-border);
     transition: background-color 0.15s, border 0.15s;
-}
-
-button:hover {
+}  button:hover {
     background-color: var(--row-hover);
     transform: scale(1.05);
     box-shadow: 0 0 10px var(--row-shadow);
@@ -208,10 +211,8 @@ button.kick {
     background-color: var(--kick-bg);
     border: 6px solid var(--kick-border);
     box-shadow: var(--kick-glow);
-}
-
-button.kick:hover,
-.kick:hover {
+}   button.kick:hover,
+    .kick:hover {
     background-color: var(--kick-border);
     border: 6px solid var(--kick-bg);
 }
@@ -221,10 +222,8 @@ button.snare {
     background-color: var(--snare-bg);
     border: 6px solid var(--snare-border);
     box-shadow: var(--snare-glow);
-}
-
-button.snare:hover,
-.snare:hover {
+}  button.snare:hover,
+   .snare:hover {
     background-color: var(--snare-border);
     border: 6px solid var(--snare-bg);
 }
@@ -234,10 +233,8 @@ button.high-hat {
     background-color: var(--high-hat-bg);
     border: 6px solid var(--high-hat-border);
     box-shadow: var(--high-hat-glow);
-}
-
-.row button.high-hat:hover,
-.high-hat:hover {
+}  .row button.high-hat:hover,
+   .high-hat:hover {
     background-color: var(--high-hat-border);
     border: 6px solid var(--high-hat-bg);
 }
@@ -257,6 +254,7 @@ button.high-hat {
         font-size: 18px;
     }
 }
+
 
 @media (max-width: 768px) {
     button.desktop,
