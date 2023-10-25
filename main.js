@@ -33,12 +33,14 @@ initializeSequencer();
 function initializeSequencer() {
     rowElements.forEach(rowElement => {
         const rowObject = createRowObject(rowElement);
+        const url = `https://raw.githubusercontent.com/marcus-rk/beatmaker/main/audio/${rowObject.audioType}`;
 
-        fetchAudioFile(`https://raw.githubusercontent.com/marcus-rk/beatmaker/main/audio/${rowObject.audioType}`)
+        fetchAudioFile(url)
             .then(audioBuffer => {
                 rowObject.audioBuffer = audioBuffer;
 
                 const buttonElements = rowElement.querySelectorAll('button');
+
                 buttonElements.forEach(buttonElement => {
                     const buttonObject = createButtonObject(buttonElement, rowObject.colorPalette);
                     rowObject.buttons.push(buttonObject);
