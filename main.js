@@ -31,67 +31,82 @@ initializeSequencer();
  * loaded audio data, color palette and button objects.
  */
 function initializeSequencer() {
-
-    // Iterate through each row in the sequencer
     rowElements.forEach(rowElement => {
-        const spanElement = rowElement.querySelector('span');
+        const rowObject = createRowObject(rowElement);
 
-        const rowObject = {
-            name: spanElement.innerText, // Get the name of the row
-            buttons: [],
-            audioBuffer: null,
-            audioType: '',
-            colorPalette: '',
-        };
-
-        // Determine the audio type and color palette based on row name
-        switch (rowObject.name) {
-            case 'Kick':
-                rowObject.audioType = 'kick/kick_1.wav';
-                rowObject.colorPalette = 'kick';
-                break;
-            case 'Snare':
-                rowObject.audioType = 'snare/snare_1.wav';
-                rowObject.colorPalette = 'snare';
-                break;
-            case 'High-hat':
-                rowObject.audioType = 'high-hat/high-hat_1.wav';
-                rowObject.colorPalette = 'high-hat';
-                break;
-        }
-
-        // Add a CSS class to the row span element to change its color based on the color palette
-        spanElement.classList.add(rowObject.colorPalette);
-
-        // Fetch and decode the audio file for this row
         fetchAudioFile(`https://raw.githubusercontent.com/marcus-rk/beatmaker/main/audio/${rowObject.audioType}`)
             .then(audioBuffer => {
-                rowObject.audioBuffer = audioBuffer; // Store the audio buffer in the row object
+                rowObject.audioBuffer = audioBuffer;
 
                 const buttonElements = rowElement.querySelectorAll('button');
-
                 buttonElements.forEach(buttonElement => {
-                    const buttonObject = {
-                        buttonElement: buttonElement,
-                        isActive: false,
-                        colorPalette: rowObject.colorPalette, // Set the color palette
-                    };
-
-                    // Add a click event listener to toggle the button's active state and update its appearance
-                    buttonElement.addEventListener('click', () => {
-                        buttonObject.isActive = !buttonObject.isActive;
-                        buttonElement.classList.toggle('active', buttonObject.isActive);
-                        buttonElement.classList.toggle(rowObject.colorPalette, buttonObject.isActive);
-                    });
-
-                    // Add the button object to the row objects' buttons array
+                    const buttonObject = createButtonObject(buttonElement, rowObject.colorPalette);
                     rowObject.buttons.push(buttonObject);
                 });
             });
 
-        // Add the row object to the sequencer array
         sequencer.push(rowObject);
     });
+}
+
+/**
+ * Creates a row object with information about the row, including name, audio type, audio buffer, and color palette.
+ *
+ * @param {HTMLElement} rowElement - The DOM element representing the row in the sequencer.
+ * @returns {object} An object representing the row with properties such as name, audioType, colorPalette, etc.
+ */
+function createRowObject(rowElement) {
+    const spanElement = rowElement.querySelector('span');
+    const name = spanElement.innerText;
+
+    const rowObject = {
+        name,
+        buttons: [],
+        audioBuffer: null,
+        audioType: '',
+        colorPalette: '',
+    };
+
+    switch (name) {
+        case 'Kick':
+            rowObject.audioType = 'kick/kick_1.wav';
+            rowObject.colorPalette = 'kick';
+            break;
+        case 'Snare':
+            rowObject.audioType = 'snare/snare_1.wav';
+            rowObject.colorPalette = 'snare';
+            break;
+        case 'High-hat':
+            rowObject.audioType = 'high-hat/high-hat_1.wav';
+            rowObject.colorPalette = 'high-hat';
+            break;
+    }
+
+    spanElement.classList.add(rowObject.colorPalette);
+    return rowObject;
+}
+
+/**
+ * Creates a button object with information about the button, including its active state and color palette.
+ *
+ * @param {HTMLElement} buttonElement - The DOM element representing the button.
+ * @param {string} colorPalette - The color palette associated with the row.
+ * @returns {object} An object representing the button with properties such as isActive and colorPalette.
+ */
+function createButtonObject(buttonElement, colorPalette) {
+    const buttonObject = {
+        buttonElement: buttonElement,
+        isActive: false,
+        colorPalette: colorPalette,
+    };
+
+    buttonElement.addEventListener('click', () => {
+        buttonObject.isActive = !buttonObject.isActive;
+        buttonElement.classList.toggle('active', buttonObject.isActive);
+        buttonElement.classList.toggle(colorPalette, buttonObject.isActive);
+    });
+
+    return buttonObject;
 }
 
 /**
