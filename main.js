@@ -4,12 +4,14 @@
 // This solution uses the Web Audio API
 const audioContext = new (window.AudioContext || window.webkitAudioContext);
 
-// Define global constants and variables
-const sequencer = [];
-let isPlaying = false;
-let beatIndex = 0;
-let BPM = 120;
-let isMobile = window.innerWidth <= 768;
+// Creating a sequencer object to store sequencer-related data
+const sequencer = {
+    rows: [],
+    isPlaying: false,
+    beatIndex: 0,
+    BPM: 120,
+    isMobile: window.innerWidth <= 768,
+};
 
 // Select DOM elements
 const bpmInputElement = document.getElementById('bpm');
@@ -28,13 +30,13 @@ initializeSequencer();
 
 /**
  * Initializes the sequencer by creating row objects: containing
- * loaded audio data, color palette and button objects.
+ * loaded audio data, color palette, and button objects.
  */
 function initializeSequencer() {
     // Iterate through each row element in the sequencer
     rowElements.forEach(rowElement => {
         const rowObject = createRowObject(rowElement);
-        // Construct the URL for the audio file of this row. (This is a raw url to GitHub repo)
+        // Construct the URL for the audio file of this row. (This is a raw URL to the GitHub repo)
         const url = `https://raw.githubusercontent.com/marcus-rk/beatmaker/main/audio/${rowObject.audioType}`;
 
         // Fetch and decode the audio file into an audio buffer
@@ -50,7 +52,7 @@ function initializeSequencer() {
                 });
             });
 
-        sequencer.push(rowObject);
+        sequencer.rows.push(rowObject);
     });
 }
 
@@ -95,7 +97,7 @@ function createRowObject(rowElement) {
 }
 
 /**
- * Creates a button object with information about the button element, active state and color palette.
+ * Creates a button object with information about the button element, active state, and color palette.
  *
  * @param {HTMLElement} buttonElement - The DOM element representing the button.
  * @param {string} colorPalette - The color palette associated with the row.
@@ -123,16 +125,16 @@ function createButtonObject(buttonElement, colorPalette) {
  * This also updates the playButton element
  */
 function togglePlay() {
-    isPlaying = !isPlaying;
+    sequencer.isPlaying = !sequencer.isPlaying;
 
-    if (isPlaying) {
+    if (sequencer.isPlaying) {
         playButton.innerText = 'Stop';
         playButton.classList.add('kick');
         playLoop();
     } else {
         playButton.innerText = 'Play';
         playButton.classList.remove('kick');
-        beatIndex = 0;
+        sequencer.beatIndex = 0;
     }
 }
 
@@ -143,19 +145,19 @@ function togglePlay() {
  * - Scheduling the next loop iteration based on the selected BPM (Beats Per Minute).
  */
 function playLoop() {
-    if (isPlaying) {
-        const numberOfRows = sequencer.length;
-        const beatsPerRow = isMobile ? 4 : 8;
+    if (sequencer.isPlaying) {
+        const numberOfRows = sequencer.rows.length;
+        const beatsPerRow = sequencer.isMobile ? 4 : 8;
         const timeOutBuffer = 150;
 
         // Iterate through each row in the sequencer
         for (let i = 0; i < numberOfRows; i++) {
-            const currentRow = sequencer[i];
-            const buttonObject = currentRow.buttons[beatIndex];
+            const currentRow = sequencer.rows[i];
+            const buttonObject = currentRow.buttons[sequencer.beatIndex];
             const buttonElement = buttonObject.buttonElement;
             let needClick = false;
 
-            // Add 'playing' css to the button for visual feedback
+            // Add 'playing' CSS to the button for visual feedback
             buttonElement.classList.add('playing');
 
             // If the button is active, play the audio sample and remove color palette by click
@@ -165,7 +167,7 @@ function playLoop() {
                 needClick = true;
             }
 
-            // After timeout, remove 'playing' css and add color palette by button click if needed
+            // After a timeout, remove 'playing' CSS and add color palette by button click if needed
             setTimeout(() => {
                 if (needClick) {
                     buttonElement.click();
@@ -175,16 +177,16 @@ function playLoop() {
         }
 
         // Move to the next beat in the sequence
-        beatIndex = (beatIndex + 1) % beatsPerRow;
+        sequencer.beatIndex = (sequencer.beatIndex + 1) % beatsPerRow;
 
         // Schedule the next loop iteration based on the selected BPM
-        setTimeout(playLoop, (60000 / BPM) - timeOutBuffer);
+        setTimeout(playLoop, (60000 / sequencer.BPM) - timeOutBuffer);
     }
 }
 
 /**
  * Fetches an audio file from the given URL,
- * Convert the response data to an array buffer.
+ * Converts the response data to an array buffer.
  * Decodes the array buffer with the Audio Context and converts it into an AudioBuffer.
  *
  * @param {string} url - The URL of the audio file to fetch.
@@ -215,7 +217,7 @@ function playSample(audioBuffer) {
 
 /**
  * Handles changes to the BPM input field, ensuring the new BPM value is within a valid range.
- * range is: 40-240 BPM (this is also set in the HTML attributes)
+ * Range is: 40-240 BPM (this is also set in the HTML attributes)
  */
 function handleBPMChange() {
     let newBPM = bpmInputElement.value;
@@ -227,7 +229,7 @@ function handleBPMChange() {
     }
 
     bpmInputElement.value = newBPM;
-    BPM = bpmInputElement.value;
+    sequencer.BPM = bpmInputElement.value;
 }
 
 /**
@@ -235,17 +237,17 @@ function handleBPMChange() {
  * adapting for mobile or desktop view.
  */
 function handleResize() {
-    isMobile = window.innerWidth <= 768;
+    sequencer.isMobile = window.innerWidth <= 768;
 }
 
 /**
- * Listens for the spacebar key press and toggles play/pause when spacebar is pressed.
+ * Listens for the spacebar key press and toggles play/pause when the spacebar is pressed.
  *
  * @param {KeyboardEvent} event - The keyboard event object.
  */
 function handleSpacebar(event) {
     if (event.key === ' ' || event.key === 'Spacebar') {
         togglePlay();
-        event.preventDefault(); // to prevent scroll-down on some browsers and devices
+        event.preventDefault(); // To prevent scroll-down on some browsers and devices
     }
 }
