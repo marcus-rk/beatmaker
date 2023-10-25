@@ -113,8 +113,7 @@ function createButtonObject(buttonElement, colorPalette) {
     // Add a click event listener to toggle the button's active state and update its appearance
     buttonElement.addEventListener('click', () => {
         buttonObject.isActive = !buttonObject.isActive;
-        buttonElement.classList.toggle('active', buttonObject.isActive);
-        buttonElement.classList.toggle(colorPalette, buttonObject.isActive);
+        buttonElement.classList.toggle(buttonObject.colorPalette, buttonObject.isActive);
     });
 
     return buttonObject;
