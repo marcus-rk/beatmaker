@@ -53,7 +53,7 @@ function initializeSequencer() {
  * Creates a row object with information about the row, including name, audio type, audio buffer, and color palette.
  *
  * @param {HTMLElement} rowElement - The DOM element representing the row in the sequencer.
- * @returns {object} An object representing the row with properties such as name, audioType, colorPalette, etc.
+ * @returns {object} An object representing the row.
  */
 function createRowObject(rowElement) {
     const spanElement = rowElement.querySelector('span');
@@ -87,11 +87,11 @@ function createRowObject(rowElement) {
 }
 
 /**
- * Creates a button object with information about the button, including its active state and color palette.
+ * Creates a button object with information about the button element, active state and color palette.
  *
  * @param {HTMLElement} buttonElement - The DOM element representing the button.
  * @param {string} colorPalette - The color palette associated with the row.
- * @returns {object} An object representing the button with properties such as isActive and colorPalette.
+ * @returns {object} Button object representing the button.
  */
 function createButtonObject(buttonElement, colorPalette) {
     const buttonObject = {
