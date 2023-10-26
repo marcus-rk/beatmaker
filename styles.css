@@ -172,35 +172,12 @@ h1 {
     gap: 10px;
 }
 
-.row {
+.row,
+.beat-counter {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-}
-
-.beat-counter {
-    background-color: var(--counter-bg);
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    width: 100%;
-    margin-top: 12px;
-    border-radius: 0 0 12px 12px;
-    border-top: 4px solid var(--counter-border);
-}
-
-.beat-counter span {
-    width: 10%;
-    padding: 12px 0;
-    margin-right: 0.85%;
-    text-align: center;
-    color: var(--counter-text);
-}
-
-span.first-beat {
-    font-weight: bold;
-    color: var(--counter-bold-text);
 }
 
 .row span,
@@ -224,6 +201,41 @@ button {
     background-color: var(--row-hover);
     transform: scale(1.05);
     box-shadow: 0 0 10px var(--row-shadow);
+}
+
+.beat-counter {
+    background-color: var(--counter-bg);
+    padding: 12px 0;
+    margin-top: 12px;
+    border-radius: 0 0 12px 12px;
+    border-top: 4px solid var(--counter-border);
+}
+
+.beat-counter button {
+    background-color: var(--row-hover);
+    border: 4px solid var(--row-border);
+    width: 15%;
+    aspect-ratio: 1.5/1;
+    padding: 5px;
+    margin: 0 1.5%;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 75%;
+    font-weight: bold;
+}
+
+.beat-counter span {
+    width: 18%;
+    padding: 12px 0;
+    text-align: center;
+    color: var(--counter-text);
+}
+
+span.first-beat {
+    font-weight: bold;
+    color: var(--counter-bold-text);
 }
 
 .kick,
@@ -294,9 +306,5 @@ button.high-hat {
     .row span {
         width: 18%;
         font-size: 75%;
-    }
-
-    .beat-counter {
-        justify-content: space-around;
     }
 }
