@@ -36,28 +36,31 @@ function initializeSequencer() {
     // Iterate through each row element in the sequencer
     rowElements.forEach(rowElement => {
         const rowObject = createRowObject(rowElement);
+
         // Construct the URL for the audio file of this row. (This is a raw URL to the GitHub repo)
+        // This is done, because GitHub Deploy, do not accept an audio-folder with sounds.
         const url = `https://raw.githubusercontent.com/marcus-rk/beatmaker/main/audio/${rowObject.audioType}`;
 
         // Fetch and decode the audio file into an audio buffer
         fetchAudioFile(url)
-            .then(audioBuffer => {
-                rowObject.audioBuffer = audioBuffer;
+            .then(audioBuffer => rowObject.audioBuffer = audioBuffer);
 
-                const buttonElements = rowElement.querySelectorAll('button');
+        // Creating buttonObjects from all the buttonElements in the rowElement and push to rowObject.
+        const buttonElements = rowElement.querySelectorAll('button');
 
-                buttonElements.forEach(buttonElement => {
-                    const buttonObject = createButtonObject(buttonElement, rowObject.colorPalette);
-                    rowObject.buttons.push(buttonObject);
-                });
-            });
+        buttonElements.forEach(buttonElement => {
+            const buttonObject = createButtonObject(buttonElement, rowObject.colorPalette);
+
+            rowObject.buttons.push(buttonObject);
+        });
 
         sequencer.rows.push(rowObject);
     });
 }
 
 /**
- * Creates a row object with information about the row, including name, audio type, audio buffer, and color palette.
+ * Creates a row object with information about the row,
+ * including name, audio type, audio buffer, and color palette.
  *
  * @param {HTMLElement} rowElement - The DOM element representing the row in the sequencer.
  * @returns {object} An object representing the row.
@@ -106,8 +109,8 @@ function createRowObject(rowElement) {
 function createButtonObject(buttonElement, colorPalette) {
     const buttonObject = {
         buttonElement: buttonElement,
-        isActive: false,
         colorPalette: colorPalette,
+        isActive: false,
     };
 
     // Add a click event listener to toggle the button's active state and update its appearance
