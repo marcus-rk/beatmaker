@@ -188,8 +188,20 @@ function playLoop() {
     }
 }
 
+/**
+ * Resets the state of all buttons in the sequencer to their default (inactive) state.
+ */
 function reset() {
+    sequencer.rows.forEach((row) => {
 
+        row.buttons.forEach((buttonObject) => {
+            // If the button is active, toggle the butten via buttonElement eventListener
+            if (buttonObject.isActive){
+                buttonObject.buttonElement.click();
+            }
+        });
+
+    });
 }
 
 /**
