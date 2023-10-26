@@ -291,26 +291,20 @@ button.high-hat {
     position: relative;
     left: -21%;
     top: 10rem;
-
-    display: none;
 }
 
 .explanation-bpm {
     z-index: 2;
     position: relative;
     left: 25%;
-    top: 4.5rem;
-
-    display: none;
+    top: 5.2rem;
 }
 
 .explanation-play {
     z-index: 2;
     position: relative;
     left: -33%;
-    top: 4.8rem;
-
-    display: none;
+    top: 4rem;
 }
 
 .explanation-reset {
@@ -400,7 +394,7 @@ button.high-hat {
     .explanation-play {
         position: relative;
         left: -18%;
-        top: 4.8rem;
+        top: 4rem;
     }
 
     .explanation-reset {
