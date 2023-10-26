@@ -224,7 +224,9 @@ button {
     justify-content: center;
     font-size: 75%;
     font-weight: bold;
-}
+} .beat-counter button:active {
+    transform: scale(1);
+  }
 
 .beat-counter span {
     width: 18%;

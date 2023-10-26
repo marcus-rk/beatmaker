@@ -16,6 +16,7 @@ const sequencer = {
 // Select DOM elements
 const bpmInputElement = document.getElementById('bpm');
 const playButton = document.querySelector('header button');
+const resetButton = document.querySelector('.beat-counter button');
 const sequencerElement = document.querySelector('.sequencer');
 const rowElements = sequencerElement.querySelectorAll('.row');
 
@@ -24,6 +25,7 @@ bpmInputElement.addEventListener('change', handleBPMChange);
 window.addEventListener('resize', handleResize);
 document.addEventListener('keydown', handleSpacebar);
 playButton.addEventListener('click', togglePlay);
+resetButton.addEventListener('click', reset);
 
 // Start initialization of the sequencer
 initializeSequencer();
@@ -184,6 +186,10 @@ function playLoop() {
         // Schedule the next loop iteration based on the selected BPM
         setTimeout(playLoop, (60000 / sequencer.BPM) - timeOutBuffer);
     }
+}
+
+function reset() {
+
 }
 
 /**
