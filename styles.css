@@ -126,12 +126,14 @@ header button,
 }
 
 header button {
-    white-space: nowrap;
-    width: 108px;
+    width: 6rem;
     background-color: var(--button-bg);
     border: 4px solid var(--button-border);
     border-radius: 12px;
     color: var(--button-text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }  header button:hover {
     background-color: var(--button-hover);
     border: 4px solid var(--button-border);
