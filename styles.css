@@ -135,7 +135,7 @@ header button {
     align-items: center;
 }  header button:hover {
     background-color: var(--button-hover);
-    border: 4px solid var(--button-border);
+    border: 4px solid var(--button-bg);
     transform: scale(1.05);
     box-shadow: 0 0 10px 0 var(--button-shadow);
 }
