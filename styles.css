@@ -4,6 +4,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
     color: var(--text-color);
     font-size: 1.2rem;
@@ -80,9 +81,21 @@
 /* Main CSS section underneath */
 /********************************************/
 
+html,
 body,
 main {
     background-color: var(--background-color);
+}
+
+body {
+    min-height: 100vh;
+}
+
+main {
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 header {
@@ -142,13 +155,6 @@ header button {
 h1 {
     font-size: 2.75rem;
     color: var(--heading-text);
-}
-
-main {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .sequencer {
