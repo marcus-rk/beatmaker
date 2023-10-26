@@ -211,6 +211,7 @@ button {
     margin-top: 12px;
     border-radius: 0 0 12px 12px;
     border-top: 4px solid var(--counter-border);
+    position: relative;
 }
 
 .beat-counter button {
@@ -309,9 +310,9 @@ button.high-hat {
 
 .explanation-reset {
     z-index: 2;
-    position: relative;
+    position: absolute;
     left: 20%;
-    top: -20rem;
+    top: -18rem;
 }
 
 .explanation-reset div.line {
@@ -418,7 +419,6 @@ button.high-hat {
 
     .explanation-reset {
         left: 32%;
-        top: -20rem;
     }
 
 }
