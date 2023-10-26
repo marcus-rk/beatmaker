@@ -195,7 +195,7 @@ function reset() {
     sequencer.rows.forEach((row) => {
 
         row.buttons.forEach((buttonObject) => {
-            // If the button is active, toggle the butten via buttonElement eventListener
+            // If the button is active, toggle the button via buttonElement eventListener
             if (buttonObject.isActive){
                 buttonObject.buttonElement.click();
             }
