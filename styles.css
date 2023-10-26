@@ -281,6 +281,52 @@ button.high-hat {
     box-shadow: var(--playing-glow);
 }
 
+
+/****************************************/
+/************ Explain pop-ups ***********/
+/****************************************/
+
+.explanation-play {
+    z-index: 2;
+    position: relative;
+    left: -33%;
+    top: 4rem;
+    display: none;
+}
+
+.explanation-row {
+    z-index: 2;
+    position: relative;
+    left: 0.25%;
+    top: 2.9rem;
+}
+
+.line {
+    width: 0.2rem;
+    background-color: var(--background-color);
+    position: absolute;
+    transform: translateY(25%);
+    height: 6rem;
+}
+
+.content {
+    background-color: var(--background-color);
+    border: 0.3rem solid var(--counter-bg);
+    box-shadow: 0 0 12px 2px var(--row-shadow);
+    padding: 0.75rem;
+    position: absolute;
+    top: 6rem; /* should match height of line */
+    transform: translateX(-49.5%);
+    text-align: center;
+    border-radius: 12px;
+    width: 10rem;
+}
+
+.text {
+    color: var(--row-border);
+    font-size: 1rem;
+}
+
 /************************************/
 /************ Media Query ***********/
 /************************************/
@@ -314,5 +360,11 @@ button.high-hat {
     .row span {
         width: 18%;
         font-size: 75%;
+    }
+
+    .explanation-play {
+        position: relative;
+        left: -18%;
+        top: 4rem;
     }
 }
