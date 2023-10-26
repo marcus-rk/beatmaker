@@ -412,7 +412,7 @@ button.high-hat {
     .beat-counter button {
         margin: 0 3.5%;
         font-size: 0.8rem;
-        padding: 25px;
+        min-width: 3.8rem;
     }
 
     .explanation-row {
