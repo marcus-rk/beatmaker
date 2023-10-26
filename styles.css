@@ -298,6 +298,10 @@ button.high-hat {
 
 
 @media (max-width: 768px) {
+    main {
+        max-width: 675px;
+    }
+
     button.desktop,
     span.desktop {
         display: none;
