@@ -291,7 +291,6 @@ button.high-hat {
     position: relative;
     left: -33%;
     top: 4rem;
-    display: none;
 }
 
 .explanation-row {
@@ -299,6 +298,7 @@ button.high-hat {
     position: relative;
     left: 0.25%;
     top: 2.9rem;
+
 }
 
 .line {
