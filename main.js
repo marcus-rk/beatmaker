@@ -20,12 +20,34 @@ const resetButton = document.querySelector('.beat-counter button');
 const sequencerElement = document.querySelector('.sequencer');
 const rowElements = sequencerElement.querySelectorAll('.row');
 
+// Select explanation DOM elements
+const rowExplainElement = document.querySelector('.explanation-row');
+const rowExplainButton = rowExplainElement.querySelector('button');
+
+const bpmExplainElement = document.querySelector('.explanation-bpm');
+const bpmExplainButton = bpmExplainElement.querySelector('button');
+
+const playExplainElement = document.querySelector('.explanation-play');
+const playExplainButton = playExplainElement.querySelector('button');
+
+const resetExplainElement = document.querySelector('.explanation-reset');
+const resetExplainButton = resetExplainElement.querySelector('button');
+
 // Event listeners
 bpmInputElement.addEventListener('change', handleBPMChange);
 window.addEventListener('resize', handleResize);
 document.addEventListener('keydown', handleSpacebar);
 playButton.addEventListener('click', togglePlay);
 resetButton.addEventListener('click', reset);
+
+rowExplainButton.addEventListener('click', handleExplanation);
+bpmExplainButton.addEventListener('click', handleExplanation);
+playExplainButton.addEventListener('click', handleExplanation);
+resetExplainButton.addEventListener('click', handleExplanation);
+
+let currentExplanation = rowExplainElement;
+
+/************************************************************************/
 
 // Start initialization of the sequencer
 initializeSequencer();
@@ -258,6 +280,40 @@ function handleBPMChange() {
  */
 function handleResize() {
     sequencer.isMobile = window.innerWidth <= 768;
+}
+
+/**
+ * Handles the explanation display by switching between explanation sections.
+ * The current explanation section is maintained in the `currentExplanation` variable.
+ * When a button is clicked, it toggles the visibility of the associated explanation section
+ * and hides the previously visible explanation section.
+ */
+function handleExplanation() {
+
+    switch (currentExplanation) {
+        case rowExplainElement:
+            bpmExplainElement.classList.remove('explain-invisible');
+            rowExplainElement.classList.add('explain-invisible');
+
+            currentExplanation = bpmExplainElement;
+            break;
+        case bpmExplainElement:
+            playExplainElement.classList.remove('explain-invisible');
+            bpmExplainElement.classList.add('explain-invisible');
+
+            currentExplanation = playExplainElement;
+            break;
+        case playExplainElement:
+            resetExplainElement.classList.remove('explain-invisible');
+            playExplainElement.classList.add('explain-invisible');
+
+            currentExplanation = resetExplainElement;
+            break;
+        case resetExplainElement:
+            resetExplainElement.classList.add('explain-invisible');
+            break;
+    }
+
 }
 
 /**

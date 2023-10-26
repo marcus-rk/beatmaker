@@ -297,7 +297,7 @@ button.high-hat {
     z-index: 2;
     position: relative;
     left: 25%;
-    top: 5.2rem;
+    top: 4.5rem;
 }
 
 .explanation-play {
@@ -311,12 +311,12 @@ button.high-hat {
     z-index: 2;
     position: relative;
     left: 20%;
-    top: -17rem;
+    top: -20rem;
 }
 
 .explanation-reset div.line {
     background-color: var(--row-border);
-    transform: translateY(155%);
+    transform: translateY(201%);
     left: -5.3rem;
     height: 6.25rem;
 }
@@ -340,11 +340,30 @@ button.high-hat {
     text-align: center;
     border-radius: 12px;
     width: 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.content button {
+    width: 50%;
+    max-height: 2.5rem;
+    padding: 5px;
+    border-radius: 12px;
+    background-color: var(--counter-bg);
+    color: var(--background-color);
+    border: none;
 }
 
 .text {
     color: var(--row-border);
     font-size: 1rem;
+}
+
+.explain-invisible {
+    display: none;
 }
 
 /************************************/
@@ -399,12 +418,7 @@ button.high-hat {
 
     .explanation-reset {
         left: 32%;
-        top: -17rem;
+        top: -20rem;
     }
 
-    .explanation-reset div.line {
-        transform: translateY(153%);
-        left: -5.3rem;
-        height: 6.25rem;
-    }
 }
