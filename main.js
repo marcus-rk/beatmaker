@@ -16,7 +16,7 @@ const sequencer = {
 // Select DOM elements
 const bpmInputElement = document.getElementById('bpm');
 const playButton = document.querySelector('header button');
-const resetButton = document.querySelector('.beat-counter button');
+const resetButton = document.getElementById('reset-button');
 const sequencerElement = document.querySelector('.sequencer');
 const rowElements = sequencerElement.querySelectorAll('.row');
 
