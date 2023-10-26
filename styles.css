@@ -80,20 +80,25 @@
 /* Main CSS section underneath */
 /********************************************/
 
-html,
-body,
-main {
-    background-color: var(--background-color);
-}
-
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
     overflow: hidden;
+    background-color: var(--background-color);
+}
+
+body {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 main {
+    background-color: var(--background-color);
+    max-width: 1080px;
+    width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
