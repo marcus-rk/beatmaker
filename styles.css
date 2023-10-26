@@ -412,11 +412,12 @@ button.high-hat {
     .beat-counter button {
         margin: 0 3.5%;
         font-size: 0.8rem;
+        padding: 30px;
     }
 
     .explanation-row {
         left: -18.5%;
-        top: 11rem;
+        top: 10rem;
     }
 
     .explanation-bpm {
@@ -430,7 +431,7 @@ button.high-hat {
     }
 
     .explanation-reset {
-        left: 32%;
+        left: 40%;
     }
 
 }
