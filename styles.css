@@ -286,19 +286,45 @@ button.high-hat {
 /************ Explain pop-ups ***********/
 /****************************************/
 
+.explanation-row {
+    z-index: 2;
+    position: relative;
+    left: -21%;
+    top: 10rem;
+
+    display: none;
+}
+
+.explanation-bpm {
+    z-index: 2;
+    position: relative;
+    left: 25%;
+    top: 4.5rem;
+
+    display: none;
+}
+
 .explanation-play {
     z-index: 2;
     position: relative;
     left: -33%;
-    top: 4rem;
+    top: 4.8rem;
+
+    display: none;
 }
 
-.explanation-row {
+.explanation-reset {
     z-index: 2;
     position: relative;
-    left: 0.25%;
-    top: 2.9rem;
+    left: 20%;
+    top: -17rem;
+}
 
+.explanation-reset div.line {
+    background-color: var(--row-border);
+    transform: translateY(155%);
+    left: -5.3rem;
+    height: 6.25rem;
 }
 
 .line {
@@ -362,9 +388,29 @@ button.high-hat {
         font-size: 75%;
     }
 
+    .explanation-row {
+        left: -18.5%;
+        top: 11rem;
+    }
+
+    .explanation-bpm {
+        left: 12%;
+    }
+
     .explanation-play {
         position: relative;
         left: -18%;
-        top: 4rem;
+        top: 4.8rem;
+    }
+
+    .explanation-reset {
+        left: 32%;
+        top: -17rem;
+    }
+
+    .explanation-reset div.line {
+        transform: translateY(153%);
+        left: -5.3rem;
+        height: 6.25rem;
     }
 }
