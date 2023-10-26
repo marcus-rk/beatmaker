@@ -306,6 +306,7 @@ function handleExplanation() {
         case playExplainElement:
             resetExplainElement.classList.remove('explain-invisible');
             playExplainElement.classList.add('explain-invisible');
+            resetButton.classList.add('rotate-animation'); // rotate show off
 
             currentExplanation = resetExplainElement;
             break;

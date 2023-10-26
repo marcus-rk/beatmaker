@@ -234,6 +234,10 @@ button {
         transform: scale(0.92)
     }
 
+.rotate-animation {
+    transform: rotate(360deg);
+}
+
 .beat-counter span {
     width: 18%;
     padding: 12px 0;
