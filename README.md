@@ -1,4 +1,4 @@
-# Beatmaker
+# Beatmaker - an online sequencer
 Welcome to Beatmaker, an interactive web application for creating beats and rhythms. Beatmaker allows you to play with different instrument sounds, create custom sequences, and control the tempo to produce your own beats. This project utilizes HTML, CSS, and JavaScript, as well as the Web Audio API, to provide a seamless and engaging music-making experience.
 
 ## Demo
