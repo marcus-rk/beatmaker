@@ -80,7 +80,7 @@
 /* Main CSS section underneath */
 /********************************************/
 
-html, body {
+html, body, main {
     height: 100%;
     background-color: var(--background-color);
 }
@@ -93,10 +93,8 @@ body {
 }
 
 main {
-    background-color: var(--background-color);
     max-width: 1080px;
     width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
