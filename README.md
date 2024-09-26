@@ -4,6 +4,8 @@ Welcome to Beatmaker, an interactive web application for creating beats and rhyt
 ## Demo
 Open in new tab or window: https://marcus-rk.github.io/beatmaker/
 
+<img width="600" alt="beatmaker_demo_screen" src="https://github.com/user-attachments/assets/000a3e1f-7522-40f8-b85b-f2c4e8bcc6f3">
+
 ## Features
 * **Instrument Sounds:** Beatmaker offers three different instrument sounds: Kick, Snare, and High-hat. Each sound has its own unique character.
 * **Sequencer:** Create your own beat sequences by toggling buttons for each instrument in the grid. Experiment with different patterns and rhythms.
